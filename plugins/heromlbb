@@ -1,0 +1,14 @@
+import fetch from 'node-fetch'
+let handler = async (m, { text, usedPrefix, command }) => {
+     if (!text) throw `Masukan nama hero\nExample: ${usedPrefix + command} Alucard`
+     let url = await fetch(`https://api.dazelpro.com/mobile-legends/hero`)
+     let mlbb = await url().catch(_ => "Error")
+     if (mlbb == "Error") throw "*Not Found*\n*Coba Jangan Gunakan Huruf Kapital"
+     let hasil = 
+     `Hero ML : ${mlbb.hero_name}\nRole Hero : ${mlbb.role}\nDurability Hero : ${mlbb.hero_durability}\nAbility Hero : ${mlbb.hero_ability}\nHero Difficulty : ${mlbb.hero_difficulty}`
+     conn.reply(m.chat, hasil, m)
+     }
+handler.help = ['heroml <name>']
+handler.tags = ['mlbb']
+handler.command = /^heroml$/i
+export default handler
